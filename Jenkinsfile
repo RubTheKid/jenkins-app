@@ -44,14 +44,15 @@ pipeline {
                     reuseNode true
                 }
             }
-            steps {
-                sh '''
-                    npm install -g serve
-                    node_modules/.bin/serve -s build & 
-                    sleep 10
-                    npx playwright test
-                '''
-            }
+                steps {
+                    sh '''
+                        npm install serve
+                        npx serve -s build &
+                        sleep 10
+                        npx playwright test
+                    '''
+                }
+
         }
     }
 
