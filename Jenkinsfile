@@ -30,7 +30,8 @@ pipeline {
             }
             steps {
                 sh '''
-                    sh 'test -f build/index.html'
+                    echo "Checking if index.html exists"
+                    test -f build/index.html
                     npm test
                 '''
             }
