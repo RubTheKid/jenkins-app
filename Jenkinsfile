@@ -50,7 +50,6 @@ pipeline {
                         npx serve -s build &
                         sleep 10
                         npx playwright test --reporter=html
-                        echo "E2E tests completed successfully"
                     '''
                 }
 
