@@ -2,36 +2,24 @@ pipeline {
     agent any
 
     stages {
-        stage('withoutDocker') {
-            // steps {
-            //     sh '''
-            //      echo "Without Docker"
-            //      ls -la 
-            //      touch container-no.txt
-            //     '''
-            // }
+        stage('Build') {
+              agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
             steps {
                 sh '''
-                echo "testing jenkins with github"
-                ls -la
-                touch github-test.txt
+                    ls -la
+                    node --version
+                    npm --version
+                    npm ci
+                    npm run build
+                    ls -la
                 '''
             }
+            
         }
-        // stage('withDocker') {
-        //     agent {
-        //         docker {
-        //             image 'node:18-alpine'
-        //             reuseNode true
-        //         }
-        //     }
-        //     steps {
-        //         sh '''
-        //         echo "With docker"
-        //         ls -la 
-        //         touch container-yes.txt
-        //         '''
-        //     }
-        // }
     }
 }
