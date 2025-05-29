@@ -49,7 +49,8 @@ pipeline {
                         npm install serve
                         npx serve -s build &
                         sleep 10
-                        npx playwright test
+                        npx playwright test --reporter=html,junit --output=jest-results
+                        echo "E2E tests completed successfully"
                     '''
                 }
 
