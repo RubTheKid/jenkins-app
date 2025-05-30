@@ -77,13 +77,14 @@ pipeline {
             }
             steps {
                 sh '''
-                    npm install netlify-cli -g
+                    npm install netlify-cli 
                     netlify --version
                 '''
             }   
         }
     }
 
+}
 
 //script for habilitating the Playwright plugin in Jenkins 
 // Try to run this script in Jenkins Dashboard > Manage Jenkins > section “Tools and actions” > Script Console:
