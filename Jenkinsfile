@@ -68,20 +68,22 @@ pipeline {
             }
         }
 
-         stage('Deploy') {
-              agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
+        stage('Deploy') {
+                agent {
+                    docker {
+                        image 'node:18-alpine'
+                        reuseNode true
+                    }
                 }
+                steps {
+                    sh '''
+                        npm config set prefix /usr/local
+                        npm install -g netlify-cli
+                        export PATH=$PATH:/usr/local/bin
+                        netlify --version
+                    '''
+                }   
             }
-            steps {
-                sh '''
-                    npm install netlify-cli@20.1.1
-                    netlify --version
-                '''
-            }   
-        }
     }
 
 }
