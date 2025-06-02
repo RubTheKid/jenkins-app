@@ -85,7 +85,9 @@ pipeline {
                     npm install netlify-cli@20.1.1
                     npx netlify --version
                     echo "Deploying to Netlify with site ID: $NETLIFY_SITE_ID"
+                    npx netlify login
                     npx netlify status
+                    npx netlify deploy
                 '''
             }   
         }
