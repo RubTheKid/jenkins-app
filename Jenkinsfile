@@ -74,7 +74,7 @@ pipeline {
             }
         }
 
-            stage('Deploy') {
+            stage('Deploy staging') {
             agent {
                 docker {
                     image 'node:18-alpine'
@@ -84,8 +84,24 @@ pipeline {
             steps {
                 sh '''
                     npm install netlify-cli@20.1.1
-                    npx netlify --version
+                    echo "Deploying to Staging with site ID: $NETLIFY_SITE_ID"
 
+                    npx netlify status
+                    npx netlify deploy --dir=build
+                '''
+            }   
+        }
+
+        stage('Deploy production') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                    npm install netlify-cli@20.1.1
                     echo "Authenticating with Netlify using the API token"
                     export NETLIFY_AUTH_TOKEN=$NETFLIFY_AUTH_TOKEN
 
