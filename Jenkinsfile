@@ -84,9 +84,14 @@ pipeline {
                 sh '''
                     npm install netlify-cli@20.1.1
                     npx netlify --version
-                    echo "Deploying to Netlify with site ID: $NETLIFY_SITE_ID"
-                    npx netlify login
+
+                    echo "Authenticating with Netlify using the API token"
+                    export NETLIFY_AUTH_TOKEN=$NETFLIFY_AUTH_TOKEN
+
                     npx netlify status
+
+
+                    echo "Deploying to Netlify with site ID: $NETLIFY_SITE_ID"
                     npx netlify deploy --dir=build --prod
                 '''
             }   
