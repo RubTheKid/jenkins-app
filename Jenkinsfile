@@ -84,6 +84,7 @@ pipeline {
             steps {
                 sh '''
                     npm install netlify-cli@20.1.1
+                    export NETLIFY_AUTH_TOKEN=$NETFLIFY_AUTH_TOKEN
                     echo "Deploying to Staging with site ID: $NETLIFY_SITE_ID"
 
                     npx netlify status
