@@ -87,7 +87,7 @@ pipeline {
                     echo "Deploying to Netlify with site ID: $NETLIFY_SITE_ID"
                     npx netlify login
                     npx netlify status
-                    npx netlify deploy
+                    npx netlify deploy --dir=build --prod
                 '''
             }   
         }
